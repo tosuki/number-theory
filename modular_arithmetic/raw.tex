@@ -1,0 +1,143 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Aritmética Modular}
+\author{Carlos Henrique}
+\date{Setembro 2025}
+
+\begin{document}
+    \maketitle
+    \section{Introdução}
+    A Aritmética é o estudo das operações básicas da matématica: adição, subtração, multiplicação e divisão. Uma observação, no final, multiplicação e divisão são derivações de adição e subtração. Portanto, quando falamos de aritmética, estamos nos referindo a literalmente a base das operações que conhecemos.
+    \begin{equation}
+        \begin{split}
+            2+2 = 4 \ \ \ \ \ \ \ \ \ \ 2-2 = 0\\
+            2*3 = 6 \ \ \ \ \ \ \ \ \ \ \frac{6}{2} = 3
+        \end{split}
+    \end{equation}
+    \subsection{Teoria dos números inteiros}
+    Uma área estudada com frequência na teoria dos números, é o conjunto dos números inteiros, ou seja $x \in \textbf{Z}$. É nessa área que surgiu os algoritmos de euclides, relação de berzout, identidade berzout, aritmética modular, estudo dos números primos e muito mais. Hoje vamos falar apenas sobre a aritmética modular.
+    \subsection{Divisão euclidiana}
+    Quando estamos falando da operação de divisão com os números inteiros, estamos falando de uma divisão euclidiana, ou seja:
+    \begin{equation}
+        a = bq + r
+    \end{equation}
+    Onde:
+    \begin{equation}
+        (a,b) \in \textbf{Z}, b \neq 0, r \geq 0
+    \end{equation}
+    Isso é muito usado pra analise combinatoria, achar $mdc$ e muito mais. No entanto, quando queremos mexer apenas com o resto dessas operações, entramos na aritmética modular, ou o famoso:
+    \begin{equation}
+        9 \mod 10 = 9
+    \end{equation}
+    \section{Aritmética Modular}
+    Quando falamos de aritmética modular, estamos falando do resto das divisões euclidianas. No entanto, deve-se seguir algumas regras para que seja uma operação válida.
+    \begin{itemize}
+        \item $a$ e $b$ devem percenter ao conjunto dos números inteiros
+        \item $b$ não pode ser zero. Isso será demonstrado ao decorrer desse post.
+        \item $r$ deve ser maior ou igual a 0, não podendo ser número negativo.
+    \end{itemize}
+
+    \subsection{Por quê b não pode ser 0?}
+    Isso na verdade é um dos principais problemas da matemática, a divisão por 0 (e também é uma das coisas que as pessoas mais erram). Portanto, vou repetir aqui de uma vez por todas: {$\frac{a}{0}$ NÃO É 0}. Quando você diz que um número dividido por 0, é 0, você gera uma falha na lógica algebrica da matemática que possibilita provar que $2 = 1$ por exemplo. No entanto, uma simples demonstração é essa:
+    \begin{equation}
+        \begin{split}
+            \frac{2}{0} = a\\
+            0\frac{2}{0} = 0a\\
+            2 = 0*a \to \nexists a
+        \end{split}
+    \end{equation}
+    Chegando nessa equação, eu te pergunto, que número vezes 0 que da 2? Não existe. Portanto, dividir por 0 não existe.
+    \subsection{Por quê $r$ tem que ser maior ou igual a 0}
+    Essa na verdade é a mais simples de se demonstrar. Caso $r$ seja menor que 0, ou seja, ele ser negativo, as equações ali para chegar nos termos da divisão euclidiana, param de funcionar. Uma vez que a natureza do resto é ser literalmente o resto. Ou seja, o que sobra, o que entra em conflito com o divisor.
+
+    \subsection{Como resolver operações de módulo?}
+    Isso é bem simples, basta dividir, o que sobrar é literalmente o resto. Uma das formas é fazer por equação também, dessa forma:
+    \begin{equation}
+        \begin{split}
+            35 \mod 10\\\\
+            a = bq+r\\
+            a = 35, b = 10, q=3, r = ?\\
+            (35) = (10)(3) + r\\
+            35 = 30 + r\\
+            35 - 30 = r\\
+            5 = r\\
+            35 \mod 10 = 5
+        \end{split}
+    \end{equation}
+    Ou até mesmo com número negativo. No entanto, nesse caso eu vou primeiro fazer da forma errada:
+    \begin{equation}
+        \begin{split}
+            -35 \mod 10\\\\
+            a = bq+r\\
+            a = -35, b = 10, q = 3, r = ?\\
+            (-35) = 10(3) + r\\
+            -35 = 30 + r\\
+            -35 - 30 = r\\
+            -65 = r
+        \end{split}
+    \end{equation}
+    É literalmente impossivel $r = -65$ ser verdade. Outra forma errada de se fazer também é essa:
+    \begin{equation}
+        \begin{split}
+           -35 \mod 10 \\\\
+           a = -35, b=10, q=-3, r = ?\\
+           (-35) = 10(-3)+r\\
+           -35 = -30 +r\\
+           -35+30 = r\\
+           -5 = r
+        \end{split}
+    \end{equation}
+    Isso ainda está errado porque isso tem que ser verdade $r \geq 0$. Portanto, o correto é achar um quociente que multiplica o divisor, que vai dar um número que torne o $r \geq 0$ e nesse caso é o $4$.
+    \begin{equation}
+        \begin{split}
+            -35 \mod 10 \\\\
+            a = -35, b = 10, q = -4, r = ?\\
+            -35 = 10(-4) + r\\
+            -35 = -40 + r\\
+            -35 + 40 = r\\
+            5 = r
+        \end{split}
+    \end{equation}
+    Agora sim está correto.
+    \subsection{Congruência}
+    Quando essa igualdade acontece:
+    \[a\mod b = c \mod b\]\
+    Dizemos que $a$ é congruente á $c$. Ou seja:
+    \[a \equiv c \pmod{b}\]
+    Existem algumas formas de verificar se essa congruência é verdadeira. A primeira delas e a mais simples (e mais manual) é fazendo a operação de modulo de cada um dos lados, por exemplo:
+    \begin{equation}
+        \begin{split}
+            13 \equiv 1 \pmod{12}\\\\
+            13 \mod 12 = 1 \mod 12\\
+            13\mod 12\\
+            a = bq+r\\
+            13 = 12(1) + r\\
+            13 = 12 + r\\
+            13 - 12 = r\\
+            1 = r\\\\
+            1 \mod 12\\
+            1 = 12(0) + r\\
+            1 = 0 + r\\
+            1 = r
+        \end{split}
+    \end{equation}
+    Portanto, essa congruência é verdadeira. No entanto, esse método é manual e leva um bom tempo se você estiver trabalhando com números muito grandes.
+
+    A segunda maneira é essa:
+    \begin{equation}
+        m|(a-b) \to a \equiv b \pmod{m}
+    \end{equation}
+    É verificar se $(a-b)$ é multiplo do modulo $m$.
+    \subsection{Demonstração da verificação por multiplo}
+    O teorema que queremos demonstrar é esse:
+    \[a \equiv b \pmod{m} \iff m|(a-b)\]
+
+    Portanto, precisamos provar o seguinte:
+    \begin{itemize}
+        \item Se $a$ e $b$ têm o mesmo resto, então $m$ divide $(a-b)$.
+    \end{itemize}
+
+\end{document}
